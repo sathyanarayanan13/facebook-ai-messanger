@@ -1,13 +1,14 @@
 import express from "express";
-import viewEngine from "./config/viewEngine.js";
+// import viewEngine from "./config/viewEngine.js";
 import initWebRoute from "./routes/web.js";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import serverless from "serverless-http";
 
 let app = express();
 
 // config view engine
-viewEngine(app);
+// viewEngine(app);
 
 //use body-parser to post data
 app.use(bodyParser.json());
@@ -23,4 +24,7 @@ app.listen(port, ()=>{
 });
 
 app.use("/.netlify/src/server", router);
-module.exports.handler = serverless(app);
+const handler = serverless(app);
+module.exports.handler = (async (event, context) => {
+   return await handler(event, context);
+});
