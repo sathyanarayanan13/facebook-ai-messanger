@@ -1,5 +1,5 @@
-require("dotenv").config();
 import request from "request";
+import dotenv from "dotenv";
 
 let postWebhook = (req, res) =>{
     // Parse the request body from the POST
@@ -245,7 +245,4 @@ let callSendAPIWithTemplate = (sender_psid) => {
     });
 };
 
-module.exports = {
-  postWebhook: postWebhook,
-  getWebhook: getWebhook
-};
+export { postWebhook, getWebhook };
